@@ -1,4 +1,4 @@
-package com.vraptor.criteria.builder;
+package com.sifionsolution.vraptor.criteria.builder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;

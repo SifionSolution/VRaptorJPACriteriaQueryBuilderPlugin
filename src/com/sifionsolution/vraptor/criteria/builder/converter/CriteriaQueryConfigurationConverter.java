@@ -1,9 +1,9 @@
-package com.vraptor.criteria.builder.converter;
+package com.sifionsolution.vraptor.criteria.builder.converter;
 
 import br.com.caelum.vraptor.Convert;
 import br.com.caelum.vraptor.converter.Converter;
 
-import com.vraptor.criteria.builder.CriteriaQueryConfiguration;
+import com.sifionsolution.vraptor.criteria.builder.CriteriaQueryConfiguration;
 
 @Convert(CriteriaQueryConfiguration.class)
 public class CriteriaQueryConfigurationConverter implements
