@@ -6,7 +6,7 @@ apply plugin: "war"
 apply plugin: "js"
 apply plugin: "css"
 
-apply from: "root.gradle"
+apply from: "https://raw.githubusercontent.com/SifionSolution/rootGradle/master/root.gradle"
 
 group = "br.com.superproject"
 version = "1.0"
