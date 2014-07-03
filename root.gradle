@@ -1,0 +1,54 @@
+//=== VERSION NUMBERS ===
+
+ext.library = [:]
+
+//== CCCCCC ==
+ext.library['cdi_weld'] = "org.jboss.weld.servlet:weld-servlet-core:2.1.2.Final"
+ext.library['cdi'] = "org.jboss.weld:weld-core-impl:2.1.2.Final"
+
+//== EEEEEE ==
+ext.library['eclipselink'] = "org.eclipse.persistence:javax.persistence:2.1.0"
+
+//== FFFFFF ==
+ext.library['flyway_core'] = "com.googlecode.flyway:flyway-core:2.3.1"
+
+//== GGGGGG ==
+ext.library['gson'] = "com.google.code.gson:gson:2.2.4"
+
+//== IIIIII ==
+ext.library['inject'] = "javax.inject:javax.inject:1"
+ext.library['i18n'] = "net.vidageek:i18n:0.5"
+
+// JJJJJJJJJJJJJJ
+ext.library['javax_jsp'] = "javax.servlet.jsp:jsp-api:2.2"
+ext.library['javax_jstl'] = "javax.servlet:jstl:1.2"
+
+ext.library['javax_servlet'] = "javax.servlet:javax.servlet-api:3.1.0"
+ext.library['javax_validation'] = "javax.validation:validation-api:1.1.0.Final"
+
+ext.library['junit'] = "junit:junit:4.11"
+ext.library['jmockito'] = "org.mockito:mockito-all:1.9.5"
+ext.library['javassist'] = "org.javassist:javassist:3.18.1-GA"
+
+//== LLLLLL ==
+ext.library['log4j'] = "log4j:log4j:1.2.17"
+
+//== MMMMMM ==
+ext.library['mysql_driver'] = "mysql:mysql-connector-java:5.1.30"
+
+//== SSSSSS ==
+ext.library['slf4j'] = "org.slf4j:slf4j-api:1.6.6"
+ext.library['sanitizer'] = "com.googlecode.owasp-java-html-sanitizer:owasp-java-html-sanitizer:r223"
+
+//== VVVVVV ==
+ext.library['vraptor'] = "br.com.caelum:vraptor:4.0.0.Final"
+ext.library['validation'] = "org.hibernate:hibernate-validator-cdi:5.1.1.Final"
+
+// Force all dependency versions to be the ones listed here
+configurations.all{
+	resolutionStrategy {
+		forcedModules = project.ext.library.values()		
+	}
+}
+
+//=== GENERAL CONFIGURATION ===

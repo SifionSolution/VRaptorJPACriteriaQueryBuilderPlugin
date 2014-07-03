@@ -1,0 +1,129 @@
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: 'eclipse-wtp'
+apply plugin: "maven"
+apply plugin: "war"
+apply plugin: "js"
+apply plugin: "css"
+
+apply from: "root.gradle"
+
+group = "br.com.superproject"
+version = "1.0"
+
+
+repositories {
+	mavenCentral()	
+}
+
+dependencies {		    
+	compile library.inject
+	compile library.cdi
+	compile library.cdi_weld
+	compile library.eclipselink
+	compile library.javax_jsp
+	compile library.javax_jstl
+	compile library.javax_servlet
+	compile library.javax_validation
+	compile library.javassist
+	compile library.log4j
+	compile library.slf4j
+	compile library.sanitizer
+	compile library.vraptor
+
+	runtime library.mysql_driver
+
+	testCompile library.jmockito
+	testCompile library.junit
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.eriwen:gradle-js-plugin:1.9.0" 
+        classpath "com.eriwen:gradle-css-plugin:1.8.3"       
+    }
+}
+
+javascript.source {
+    dev {
+        js {
+            srcDir 'webContent/js'
+            include "*.js"
+            exclude "*.min.js"
+        }
+    }
+    prod {
+        js {
+            srcDir 'webContent/js'
+            include "*.min.js"
+        }
+    }
+}
+
+task toProduction(dependsOn: ['combineCssMandatory', 'minifyJsTerms', 'minifyJsRoot', 'minifyJsMandatory', 'productionConfig'])
+
+task combineCssMandatory(type: com.eriwen.gradle.css.tasks.CombineCssTask) {
+    source = ["WebContent/css/redicons.css", "WebContent/css/style.css"]			
+    dest = file("WebContent/css/style-all.css")
+}
+
+// Not working.
+// Using: http://devilo.us/#
+task minifyCssMandatory(type: com.eriwen.gradle.css.tasks.MinifyCssTask) {
+	source = combineCssMandatory
+    dest = file("WebContent/css/style-all-min.css")	
+}
+
+
+task minifyJsTerms(type: com.eriwen.gradle.js.tasks.MinifyJsTask) {
+	source = "WebContent/js/terms/terms.js"
+    dest = file("WebContent/js/terms/terms-min.js")	
+}
+	
+task combineJsRoot(type: com.eriwen.gradle.js.tasks.CombineJsTask) {
+    source = ["WebContent/js/jquery.mixitup.min.js", "WebContent/plugin/pikachoose/lib/jquery.jcarousel.min.js", "WebContent/plugin/pikachoose/lib/jquery.pikachoose.min.js", "WebContent/plugin/jplayer/jquery.jplayer.min.js", "WebContent/js/root/message.js", "WebContent/js/root/index.js"]			
+    dest = file("WebContent/js/root/root-all.js")
+}
+
+task minifyJsRoot(type: com.eriwen.gradle.js.tasks.MinifyJsTask) {
+	source = combineJsRoot
+    dest = file("WebContent/js/root/root-all-min.js")	
+}
+
+task combineJsMandatory(type: com.eriwen.gradle.js.tasks.CombineJsTask) {
+    source = ["WebContent/plugin/bootstrap-modal/js/bootstrap-modalmanager.js", "WebContent/plugin/bootstrap-modal/js/bootstrap-modal.js", "WebContent/js/bootstrap-dropdown.js", "WebContent/js/mandatory/bootstrap-analytics-setup.js"]			
+    dest = file("WebContent/js/mandatory/mandatory-all.js")
+}
+
+task minifyJsMandatory(type: com.eriwen.gradle.js.tasks.MinifyJsTask) {
+	source = combineJsMandatory
+    dest = file("WebContent/js/mandatory/mandatory-all-min.js")	
+}
+
+task productionConfig(type: Copy) {
+    from 'WebContent/WEB-INF/config/production'
+    into 'WebContent/WEB-INF/config'
+    include '*'
+}
+
+
+webAppDirName = 'WebContent'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        
+        resources {
+        	srcDir 'src'
+        }
+    }
+}
+
+ configurations.all { 
+     resolutionStrategy.cacheChangingModulesFor 0, 'seconds' 
+   } 

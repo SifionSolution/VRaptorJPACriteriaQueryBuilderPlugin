@@ -1,0 +1,14 @@
+*~
+.DS_Store
+*.class
+target
+.classpath
+.project
+.settings
+.sonar
+.externalToolBuilders
+build
+lib/default
+lib/provided
+lib/test
+.gradle
