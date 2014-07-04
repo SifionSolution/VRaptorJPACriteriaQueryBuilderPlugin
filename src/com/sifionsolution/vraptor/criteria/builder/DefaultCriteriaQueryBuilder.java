@@ -19,7 +19,7 @@ public class DefaultCriteriaQueryBuilder implements CriteriaQueryBuilder {
 		CriteriaQuery<?> query = builder.createQuery(entity);
 		Root<?> root = query.from(entity);
 
-		configuration.applyCustomModifications(builder, query, root);
+		configuration.applySpecificModifications(builder, query, root);
 
 		return root;
 	}

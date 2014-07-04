@@ -7,10 +7,10 @@ import javax.persistence.criteria.Root;
 public interface CriteriaQueryConfiguration {
 	Class<?> forEntity();
 
-	default void applyCustomModifications(CriteriaBuilder builder, CriteriaQuery<?> criteria, Root<?> root) {
+	default void applySpecificModifications(CriteriaBuilder builder, CriteriaQuery<?> criteria, Root<?> root) {
 	}
 
-	default String countByProperty() {
+	default String countDistinctByProperty() {
 		return "";
 	}
 }
