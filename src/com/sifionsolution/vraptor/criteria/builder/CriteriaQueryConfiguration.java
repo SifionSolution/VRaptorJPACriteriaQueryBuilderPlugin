@@ -1,13 +1,11 @@
 package com.sifionsolution.vraptor.criteria.builder;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import com.sifionsolution.vraptor.criteria.builder.data.source.CriteriaQueryDataSource;
 
 public interface CriteriaQueryConfiguration {
 	Class<?> forEntity();
 
-	default void applySpecificModifications(CriteriaBuilder builder, CriteriaQuery<?> criteria, Root<?> root) {
+	default void applySpecificModifications(CriteriaQueryDataSource source) {
 	}
 
 	default String countDistinctByProperty() {

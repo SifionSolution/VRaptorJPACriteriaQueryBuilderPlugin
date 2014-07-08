@@ -1,7 +1,7 @@
 package com.sifionsolution.vraptor.criteria.builder;
 
-import javax.persistence.criteria.Root;
+import com.sifionsolution.vraptor.criteria.builder.data.source.CriteriaQueryDataSource;
 
 public interface CriteriaQueryBuilder {
-	Root<?> build(CriteriaQueryConfiguration configuration);
+	CriteriaQueryDataSource build(CriteriaQueryConfiguration configuration);
 }
